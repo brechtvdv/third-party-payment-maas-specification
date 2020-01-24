@@ -20,11 +20,61 @@ Een Maas-app moet met andere woorden bijhouden (bv. een extra kolom toevoegen in
 
 In deze sectie beschrijven we hoe een reis beschreven kan worden met de OSLO-mobiliteitsstandaard voor "trips en aanbod". Het is namelijk cruciaal voor de rule engine dat de input van MaaS-apps op dezelfde manier beschreven is, ongeacht hoe deze in de back-end exact bijgehouden wordt.
 
-Deze standaard is een Applicatie-Profiel (AP) en beschrijft adhv een UML-diagram welke entiteiten met bijhorende relaties en attributen uitgewisseld kunnen of moeten worden. Het belangrijkste om op te merken is dat er achter de schermen gewerkt wordt met globale identificatoren (URI's) om deze zaken te beschrijven. Het gebruiken van HTTP URI's, wat één van de bouwblokken van Linked Data is, zorgt ervoor dat iedereen op dezelfde manier naar iets verwijst. Dit heeft als voordeel dat je de term kan opzoeken (bv. https://schema.org/Trip om aan te duiden dat iets een Reis is) om zeker te zijn dat hetzelfde bedoeld wordt en dit is niet gevoelig voor bepaalde schrijfwijzes. Eenmaal de URI vast staat, wordt deze niet zomaar meer gewijzigd. Dankzij deze AP-standaard kunnen developers opzoeken wat de afspraak is, namelijk welke URI's gebruikt moeten worden. Om Linked Data te beschrijven zijn verschillende formaten mogelijk, maar de focus hier ligt op het gebruik van JSON-LD. Indien dit nog onbekend klinkt, verwijzen we graag door naar de JSON-LD spec: https://www.w3.org/TR/json-ld11/#basic-concepts 
+Deze standaard is een Applicatie-Profiel (AP) en beschrijft adhv een UML-diagram welke entiteiten met bijhorende relaties en attributen uitgewisseld kunnen of moeten worden. Het belangrijkste om op te merken is dat er achter de schermen gewerkt wordt met globale identificatoren (URI's) om deze zaken te beschrijven. Het gebruiken van HTTP URI's, wat één van de bouwblokken van Linked Data is, zorgt ervoor dat iedereen op dezelfde manier naar iets verwijst. Dit heeft als voordeel dat je de term kan opzoeken (bv. https://schema.org/Trip om aan te duiden dat iets een Reis is) om zeker te zijn dat hetzelfde bedoeld wordt en dit is niet gevoelig voor bepaalde schrijfwijzes. Eenmaal de URI vast staat, wordt deze niet zomaar meer gewijzigd. Dankzij deze AP-standaard kunnen developers opzoeken wat de afspraak is, namelijk welke URI's (afkomstig van OSLO vocabularia of andere internationale standaarden) gebruikt moeten worden. Om Linked Data te beschrijven zijn verschillende formaten mogelijk, maar de focus hier ligt op het gebruik van JSON-LD. Indien dit nog onbekend klinkt, verwijzen we graag door naar de JSON-LD spec: https://www.w3.org/TR/json-ld11/#basic-concepts 
 
 Voor derdebetalersregeling in MaaS-apps dient enkel het reizigersdeel van het AP geïmplementeerd te worden. Deze kan je hieronder zien:
-[oslo-reis](oslo-reis.PNG)
 
+<a href="https://github.com/brechtvdv/third_party_payment_maas/blob/master/oslo-reis.PNG"><img src="https://github.com/brechtvdv/third_party_payment_maas/blob/master/oslo-reis.PNG" align="left" height="500" width="auto" ></a>
+
+We zullen dus enkel Reis, de uitgevoerde Route en bijhorende Routesegmenten gebruiken.
+Bijvoorbeeld:
+```
+{ "@context": [ "https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112/context/mobiliteit-trips-en-aanbod-ap.jsonld", "https://schema.org", {
+  
+}]
+ ,  "@id": "https://w3id.github.io/people/brechtvdv",
+  "@type": "Reiziger",
+ "pseudoniem": "brechtvdv",
+ "Onderneemt": {
+   "@id": "reizen/123",
+   "@type": "Reis",
+   "vertrektijdstip": "2018-01-01T01:01:00",
+   "aankomsttijdstip": "2018-01-01T01:40:00",
+   "Reis.reisweg": [
+     {"@value": "Station Gent-Sint-Pieters", "@language": "nl" }, {"@value": "Koninklijke Vlaamse Academie", "@language": "nl"}
+   ],
+   "uitgevoerdeRoute": {
+     "@type": "Route",
+     "BestaatUit": [
+       {
+         "vertrektijdstip": "2018-01-01T01:01:00",
+         "aankomsttijdstip": "2018-01-01T01:31:00",
+         "vertrekpunt": "Station Gent-Sint-Pieters",
+         "aankomstpunt": "Station Brussel-Centraal",
+         "reisduur": "PT30M",
+         "kostprijs": {
+           "@type": "Geldbedrag",
+           "value": "8,2",
+           "currency": "EUR"
+         },
+         "Route.type": "https://data.vlaanderen.be/conceptscheme/routetypes/id/goedkoopst",
+         "Vervoermiddel": "https://data.vlaanderen.be/conceptscheme/vervoermiddelen/id/trein"
+       },
+       {
+         "vertrektijdstip": "2018-01-01T01:31:00",
+         "aankomsttijdstip": "2018-01-01T01:40:00",
+         "vertrekpunt": "Station Brussel-Centraal",
+         "aankomstpunt": "Koninklijke Vlaamse Academie",
+         "reisduur": "PT9M",
+         "Route.type": "https://data.vlaanderen.be/conceptscheme/id/snelst",
+         "Vervoermiddel": "https://data.vlaanderen.be/conceptscheme/vervoermiddelen/id/teVoet"
+       }
+     ]
+   }
+ }
+ 
+}
+```
 
 ### valideren met rule engine
 
