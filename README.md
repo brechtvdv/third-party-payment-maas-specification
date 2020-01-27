@@ -29,9 +29,9 @@ Voor derdebetalersregeling in MaaS-apps dient enkel het reizigersdeel van het AP
 We zullen dus enkel Reis, de uitgevoerde Route en bijhorende Routesegmenten gebruiken.
 Bijvoorbeeld:
 ```
-{ "@context": [ "https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112/context/mobiliteit-trips-en-aanbod-ap.jsonld", "https://schema.org", {
-  
-}]
+let reis = 
+{ "@context": [ "https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112/context/mobiliteit-trips-en-aanbod-ap.jsonld", "https://schema.org"
+]
  ,  "@id": "https://w3id.github.io/people/brechtvdv",
   "@type": "Reiziger",
  "pseudoniem": "brechtvdv",
@@ -47,6 +47,7 @@ Bijvoorbeeld:
      "@type": "Route",
      "BestaatUit": [
        {
+         "@type": RouteSegment",
          "vertrektijdstip": "2018-01-01T01:01:00",
          "aankomsttijdstip": "2018-01-01T01:31:00",
          "vertrekpunt": "Station Gent-Sint-Pieters",
@@ -61,6 +62,7 @@ Bijvoorbeeld:
          "Vervoermiddel": "https://data.vlaanderen.be/conceptscheme/vervoermiddelen/id/trein"
        },
        {
+         "@type": RouteSegment",
          "vertrektijdstip": "2018-01-01T01:31:00",
          "aankomsttijdstip": "2018-01-01T01:40:00",
          "vertrekpunt": "Station Brussel-Centraal",
@@ -78,5 +80,41 @@ Bijvoorbeeld:
 
 ### valideren met rule engine
 
-Hoe kan een Maas-partij valideren met de rule-engine
+Een Maas-partij kan valideren en te weten komen hoeveel korting toegekend kan worden door de javascript-functie uit te voeren die verbonden is aan de voucher.
+Bijvoorbeeld: let toeTeKennenKorting = berekenKortingVanSubsidiemaatregel1(reis)
+
+```
+const jsonldParser = new JsonLdParser();
+
+var NS_OSLO_TRIPS_EN_AANBOD = 'https://data.vlaanderen.be/ns/mobiliteit/trips-en-aanbod#';
+
+function berekenKortingVanSubsidiemaatregel1(reis) {
+  let maxKorting = 5; // euro
+  let toetekennenBedrag = 0; // hierin komt hoeveel toegekend mag worden
+  
+  // Omzetten naar RDF-JS object
+  let store = jsonld2store(reis);
+  
+  // Valideren dat aan alles is voldaan
+  const routesegmenten = store.getQuads(namedNode(NS_OSLO_TRIPS_EN_AANBOD + "RouteSegment"), null, null);(namedNode('http://example.org/subject'));
+  // sorteren op vertrektijd etc. 
+  console.log(routesegmenten);
+  
+	return [ [reisURI, "https://example.org#heeftRechtOpEuro", toetekennenBedrag] ]; 
+}
+
+
+function jsonld2store(reis) {
+  const storeStream = require("rdf-store-stream").storeStream;
+  // Import the json-ld stream into a store
+  const store = await storeStream(jsonldParser);
+
+  jsonldParser.write(reis);
+    .on('data', console.log)
+    .on('error', console.error)
+    .on('end', () => console.log('All triples were parsed!'));
+    
+  return store;
+}
+```
 
