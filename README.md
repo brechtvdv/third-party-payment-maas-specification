@@ -32,53 +32,55 @@ We will only implement Trip (Reis), the executed Route (uitgevoerdeRoute) and as
 Example journey:
 ```
 let journey = 
-{ "@context": [ "https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112/context/mobiliteit-trips-en-aanbod-ap.jsonld", "https://schema.org"
+{ "@context": [ "https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112/context/mobiliteit-trips-en-aanbod-ap.jsonld",
+"https://schema.org"
 ]
- ,  "@id": "https://w3id.github.io/people/brechtvdv",
-  "@type": "Reiziger",
- "pseudoniem": "brechtvdv",
+ "@type": "Reiziger",
  "Onderneemt": {
-   "@id": "reizen/123",
    "@type": "Reis",
-   "vertrektijdstip": "2018-01-01T01:01:00",
-   "aankomsttijdstip": "2018-01-01T01:40:00",
-   "Reis.reisweg": [
-     {"@value": "Station Gent-Sint-Pieters", "@language": "nl" }, {"@value": "Koninklijke Vlaamse Academie", "@language": "nl"}
-   ],
    "uitgevoerdeRoute": {
      "@type": "Route",
      "BestaatUit": [
        {
-         "@type": RouteSegment",
+         "@type": "Routesegment",
          "vertrektijdstip": "2018-01-01T01:01:00",
          "aankomsttijdstip": "2018-01-01T01:31:00",
-         "vertrekpunt": "Station Gent-Sint-Pieters",
-         "aankomstpunt": "Station Brussel-Centraal",
-         "reisduur": "PT30M",
+         "vertrekpunt": { 
+            "@type": "Punt",
+            "wkt": "POINT(3.7099885940551762 51.03561909085579)"
+         },
+         "aankomstpunt": { 
+            "@type": "Punt",
+            "wkt": "POINT(4.357527494430542 50.84662457938373)"
+         },
          "kostprijs": {
            "@type": "Geldbedrag",
            "value": "8,2",
            "currency": "EUR"
          },
-         "Route.type": "https://data.vlaanderen.be/conceptscheme/routetypes/id/goedkoopst",
-         "Vervoermiddel": "https://data.vlaanderen.be/conceptscheme/vervoermiddelen/id/trein"
+         "Routesegment.vervoermiddel": "https://lodi.ilabt.imec.be/modi/thesauri/modality/1"
        },
        {
-         "@type": RouteSegment",
+         "@type": "Routesegment",
          "vertrektijdstip": "2018-01-01T01:31:00",
          "aankomsttijdstip": "2018-01-01T01:40:00",
-         "vertrekpunt": "Station Brussel-Centraal",
-         "aankomstpunt": "Koninklijke Vlaamse Academie",
-         "reisduur": "PT9M",
-         "Route.type": "https://data.vlaanderen.be/conceptscheme/id/snelst",
-         "Vervoermiddel": "https://data.vlaanderen.be/conceptscheme/vervoermiddelen/id/teVoet"
+         "vertrekpunt": { 
+            "@type": "Punt",
+            "wkt": "POINT(4.357527494430542 50.84662457938373)"
+         },
+         "aankomstpunt": { 
+            "@type": "Punt",
+            "wkt": "POINT(4.365552663803101 50.84217373687747)"
+         },
+         "Routesegment.vervoermiddel": "https://lodi.ilabt.imec.be/modi/thesauri/modality/2"
        }
      ]
    }
  }
- 
 }
 ```
+
+For the modality types (Vervoermiddel property), we will maintain a taxonomy here: https://github.com/brechtvdv/criterionrequirement_for_mobility/blob/master/skos-modality.ttl 
 
 ### Validate journey with rule engine
 
