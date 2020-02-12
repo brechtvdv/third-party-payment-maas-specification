@@ -29,7 +29,9 @@ We will only implement Trip (Reis), the executed Route (uitgevoerdeRoute) and as
 
 <a href="https://github.com/brechtvdv/third_party_payment_maas/blob/master/oslo-reis.PNG"><img src="https://github.com/brechtvdv/third_party_payment_maas/blob/master/oslo-reis.PNG" align="left" height="500" width="auto" ></a>
 
-Example journey:
+As example, we describe the minimal information that must be provided of a journey. Here we say that a traveller (Reiziger) undertakes a journey (Reis). The route that is performed (uitgevoerdeRoute) consists of (bestaatUit) route segments. A route segment describes a part of the journey that has been done with the same transportation modality (vervoermiddel). It contains its time of departure (vertrektijdstip) and arrival (aankomsttijdstip) and from point A (vertrekpunt) to point B (aankomstpunt) it is located. 
+For the modality types, the URIs will be maintained here: https://github.com/brechtvdv/criterionrequirement_for_mobility/blob/master/skos-modality.ttl 
+
 ```
 let journey = 
 { "@context": [ "https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112/context/mobiliteit-trips-en-aanbod-ap.jsonld",
@@ -79,8 +81,6 @@ let journey =
  }
 }
 ```
-
-For the modality types (Vervoermiddel property), we will maintain a taxonomy here: https://github.com/brechtvdv/criterionrequirement_for_mobility/blob/master/skos-modality.ttl 
 
 ### Validate journey with rule engine
 
