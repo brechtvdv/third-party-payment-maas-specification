@@ -13,7 +13,7 @@ Finally, we demonstrate with a Proof of Concept how rules can be created by a ci
 ## Step 4: Detect voucher
 
 The MaaS app knows from step 2 that certain vouchers are linked to a subsidy measure.
-In other words, a MaaS app must keep track (e.g. add an extra column in the database) of which subsidy measure applies per voucher code.
+In other words, a MaaS app must keep track (e.g. add an extra column in a table) of which subsidy measure applies per voucher code.
 
 ## Step 5: Validation of user journey
 
@@ -80,7 +80,16 @@ let journey =
 }
 ```
 
-### Validate with rule engine
+### Validate journey with rule engine
 
-A MaaS app can validate and find out how much discount can be granted by executing the javascript function associated with the voucher.
-For example: let discountToBeGranted = calculateDiscountFromSubsidy1(journey)
+The user has finished his journey and the MaaS app can now describe its journey with the above OSLO standard.
+To validate whether the journey is compliant with the criteria of the subsidy measure that is coupled with the voucher code,
+the MaaS back-end can run a small software component (rule engine) that takes two files as input:
+* a JSON-LD description of the criteria that is coupled with the subsidy measure: these criteria should be created by the local government and published with an Web API (like their website). For this Proof of Concept, the MaaS party will have a local copy of the description. We will create a simple GUI that can be used to create some example subsidy measures.
+* a JSON-LD description of the user journey (see above)
+
+The rule engine program can be run on Windows, Linux or MacOS and and looks like this on the command line:
+```
+./rule-engine -s exampleSubsidymeasure.jsonld -j exampleJourney.jsonld
+```
+This will return OK or NOK, which means that the voucher may be given or not respectively.
