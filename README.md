@@ -1,5 +1,5 @@
 # Third party support for Mobility as a Service applications
-
+teset
 Thanks to Mobility as a Service (MaaS) applications, citizens are stimulated to integrate public transport and partial mobility in their travel behaviour, because they get a better picture of which routes (and what their costs are) are possible to make their journey. Also cities can tackle challenges such as air quality and traffic jams by supporting multi modal transportation through MaaS applications. 
 With third party support from the government, citizens receive a discount (or even free) on its journey if certain criteria are met. For example: was the journey made during rush hour or was a shared bicycle used?
 
