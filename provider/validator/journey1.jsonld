@@ -1,0 +1,46 @@
+{ "@context": [ "https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112/context/mobiliteit-trips-en-aanbod-ap.jsonld",
+"https://schema.org"
+]
+ "@type": "Reiziger",
+ "Onderneemt": {
+   "@type": "Reis",
+   "uitgevoerdeRoute": {
+     "@type": "Route",
+     "BestaatUit": [
+       {
+         "@type": "Routesegment",
+         "vertrektijdstip": "2018-01-01T01:01:00",
+         "aankomsttijdstip": "2018-01-01T01:31:00",
+         "vertrekpunt": { 
+            "@type": "Punt",
+            "wkt": "POINT(3.7099885940551762 51.03561909085579)"
+         },
+         "aankomstpunt": { 
+            "@type": "Punt",
+            "wkt": "POINT(4.357527494430542 50.84662457938373)"
+         },
+         "kostprijs": {
+           "@type": "Geldbedrag",
+           "value": "8,2",
+           "currency": "EUR"
+         },
+         "Routesegment.vervoermiddel": "https://lodi.ilabt.imec.be/modi/thesauri/modality/1"
+       },
+       {
+         "@type": "Routesegment",
+         "vertrektijdstip": "2018-01-01T01:31:00",
+         "aankomsttijdstip": "2018-01-01T01:40:00",
+         "vertrekpunt": { 
+            "@type": "Punt",
+            "wkt": "POINT(4.357527494430542 50.84662457938373)"
+         },
+         "aankomstpunt": { 
+            "@type": "Punt",
+            "wkt": "POINT(4.365552663803101 50.84217373687747)"
+         },
+         "Routesegment.vervoermiddel": "https://lodi.ilabt.imec.be/modi/thesauri/modality/2"
+       }
+     ]
+   }
+ }
+}

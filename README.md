@@ -1,97 +1,19 @@
-# Third party support for Mobility as a Service applications
+# Third party support for Mobility as a Service Specification
+_Dutch below_
 
-Thanks to Mobility as a Service (MaaS) applications, citizens are stimulated to integrate public transport and partial mobility in their travel behaviour, because they get a better picture of which routes (and what their costs are) are possible to make their journey. Also cities can tackle challenges such as air quality and traffic jams by supporting multi modal transportation through MaaS applications. 
-With third party support from the government, citizens receive a discount (or even free) on its journey if certain criteria are met. For example: was the journey made during rush hour or was a shared bicycle used?
+The Third party support for MaaS Specification (TMS), started from the City of Things VLAIO call with the MODI project, is a specification for facilitating mobility discounts between local governments and citizens, through MaaS providers. Inspired by projects like the Mobility Data Specifications ([MDS](https://github.com/openmobilityfoundation/mobility-data-specification)) and Local Decisions as Linked Open Data ([LBLOD](https://github.com/lblod)), this specification provides a standardized way for local governements to express subsidy measurements for certain trips in a machine-readable format, and for MaaS providers to describe trips and validate these with the subsidy measurements in an automated fashion. Also, TMS provides templates for regulating mobility providers and for setting up a payment system between local government and MaaS providers.
 
-![Overview](modi-overzicht.PNG)
+TMS is currently comprised of four distinct components:
 
-## Step 3: subsidy measure and rule engine
+* [`license framework`][vergunningkader] (vergunningkader folder - only Dutch available) contains a local decision template that local governments can reuse for regulating shared mobility providers. In order that MaaS applications can apply for third party support from a local government, it is crucial that one or more mobility providers are operating in the cities' boundaries. Therefore, this template guide local governments to open the public domain for mobility providers. Only a Dutch version of this license framework is available.
 
-In this step, we describe how a subsidy measure for third party support of MaaS apps can be described, in accordance with the standards of Linked Decisions as Linked Open Data (LBLOD). We also describe how the code of the rule engine looks like.
-Finally, we demonstrate with a Proof of Concept how rules can be created by a city and then generate a rule engine from it automatically.
+* [`third party payment system agreement`][samenwerkingsovereenkomst] (samenwerkingsovereenkomst folder - only Dutch available) describes a 1 on 1 agreement between a local government and a MaaS provider. This incorporates the different steps that will taken from defining the subsidiy measurement and how the journey of a user will validated to reporting the usage of a subsidy measurement and reimbursement of the discounts.
 
-## Step 4: Detect voucher
+* [`agency`][agency] specifies how local governments can create subsidy measurements in a machine-readable and standardized format. For example: _shared bikes have a maximum discount of 2 euro between 4pm and 6 pm_.
 
-The MaaS app knows from step 2 that certain vouchers are linked to a subsidy measure.
-In other words, a MaaS app must keep track (e.g. add an extra column in a table) of which subsidy measure applies per voucher code.
+* [`provider`][provider] specifies how MaaS providers can describe the journey of a user in a machine-readable and standardized format. A validator API (_rule engine_) is made available that validates a journey with a subsidy measurement. This validator needs to be deployed on the infrastructure of the MaaS provider for privacy protection reasons. This way, MaaS providers don't need to implement rules themselves and more complex rules for the needs of local governments can be implemented without raising the complexity for MaaS providers. The validator is Open Source thus can be maintained and reused by all MaaS providers.
 
-## Step 5: Validation of user journey
 
-### describe a journey with the OSLO mobility standard
+# Derdebetalersregeling voor Mobiliteit als een Dienst Specificatie
 
-In this section we describe how a trip can be described using the OSLO mobility standard for "trips and offerings". It is crucial that all MaaS apps use the same semantics for a user journey, so the rule engine can be generic.
-
-This OSLO standard is an Application Profile (AP) and describes with a UML diagram which entities, relationships and attributes can or should be exchanged. The most important thing is that behind the scenes global identifiers (URIs) are used to describe these matters. Using HTTP URIs, which is one of the building blocks of Linked Data, ensures that everyone refers to something in the same way. An advantage from HTTP is that you can look up the term (e.g. https://schema.org/Trip to indicate that something is a Journey) to make sure the same thing is meant and this is not sensitive to any particular writing style. Thanks to this AP standard, developers can look up what the agreement is, namely which URIs (from OSLO vocabularies or other international standards) should be used. Different formats (JSON-LD, Turtle...) are possible to describe Linked Data, but the focus here is on the use of JSON-LD. See also the JSON-LD spec: https://www.w3.org/TR/json-ld11/#basic-concepts. 
-
-The AP is published here: https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112
-For this use case, only the passenger part of the AP needs to be implemented. This can be seen below:
-We will only implement Trip (Reis), the executed Route (uitgevoerdeRoute) and associated route segments.
-
-<a href="https://github.com/brechtvdv/third_party_payment_maas/blob/master/oslo-reis.PNG"><img src="https://github.com/brechtvdv/third_party_payment_maas/blob/master/oslo-reis.PNG" align="left" height="500" width="auto" ></a>
-
-As example, we describe the minimal information that must be provided of a journey. Here we say that a traveller (Reiziger) undertakes a journey (Reis). The route that is performed (uitgevoerdeRoute) consists of (bestaatUit) route segments. A route segment describes a part of the journey that has been done with the same transportation modality (vervoermiddel). It contains its time of departure (vertrektijdstip) and arrival (aankomsttijdstip) and from point A (vertrekpunt) to point B (aankomstpunt) it is located. 
-For the modality types, the URIs will be maintained here: https://github.com/brechtvdv/criterionrequirement_for_mobility/blob/master/skos-modality.ttl 
-
-```
-let journey = 
-{ "@context": [ "https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112/context/mobiliteit-trips-en-aanbod-ap.jsonld",
-"https://schema.org"
-]
- "@type": "Reiziger",
- "Onderneemt": {
-   "@type": "Reis",
-   "uitgevoerdeRoute": {
-     "@type": "Route",
-     "BestaatUit": [
-       {
-         "@type": "Routesegment",
-         "vertrektijdstip": "2018-01-01T01:01:00",
-         "aankomsttijdstip": "2018-01-01T01:31:00",
-         "vertrekpunt": { 
-            "@type": "Punt",
-            "wkt": "POINT(3.7099885940551762 51.03561909085579)"
-         },
-         "aankomstpunt": { 
-            "@type": "Punt",
-            "wkt": "POINT(4.357527494430542 50.84662457938373)"
-         },
-         "kostprijs": {
-           "@type": "Geldbedrag",
-           "value": "8,2",
-           "currency": "EUR"
-         },
-         "Routesegment.vervoermiddel": "https://lodi.ilabt.imec.be/modi/thesauri/modality/1"
-       },
-       {
-         "@type": "Routesegment",
-         "vertrektijdstip": "2018-01-01T01:31:00",
-         "aankomsttijdstip": "2018-01-01T01:40:00",
-         "vertrekpunt": { 
-            "@type": "Punt",
-            "wkt": "POINT(4.357527494430542 50.84662457938373)"
-         },
-         "aankomstpunt": { 
-            "@type": "Punt",
-            "wkt": "POINT(4.365552663803101 50.84217373687747)"
-         },
-         "Routesegment.vervoermiddel": "https://lodi.ilabt.imec.be/modi/thesauri/modality/2"
-       }
-     ]
-   }
- }
-}
-```
-
-### Validate journey with rule engine
-
-The user has finished his journey and the MaaS app can now describe its journey with the above OSLO standard.
-To validate whether the journey is compliant with the criteria of the subsidy measure that is coupled with the voucher code,
-the MaaS back-end can run a small software component (rule engine) that takes two files as input:
-* a JSON-LD description of the criteria that is coupled with the subsidy measure: these criteria should be created by the local government and published with an Web API (like their website). For this Proof of Concept, the MaaS party will have a local copy of the description. We will create a simple GUI that can be used to create some example subsidy measures.
-* a JSON-LD description of the user journey (see above)
-
-The rule engine program can be run on Windows, Linux or MacOS and and looks like this on the command line:
-```
-./rule-engine -s exampleSubsidymeasure.jsonld -j exampleJourney.jsonld
-```
-This will return OK or NOK, which means that the voucher may be given or not respectively.
+_To be announced_
