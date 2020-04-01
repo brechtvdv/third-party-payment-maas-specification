@@ -45,7 +45,7 @@ For example:
 | Field        | Type | Description       | Example                                 |
 | ------------ | ---- | ----------------- | ------------------------------------------- |
 | `description` | String  | Description of a journey requirement   | A shared bike must have been used." |
-| `modality` | Enum   | [Modality Type](#Modality Type) | shared bike |
+| `modality` | Enum   | [Modality Type](#Modality-Type) | shared bike |
 
 ### Enum definitions
 
