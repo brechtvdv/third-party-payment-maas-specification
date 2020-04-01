@@ -351,9 +351,18 @@
 		"hasCriterionRequirement": "heeftVereiste",
 		"CriterionRequirement": "Vereiste",
 		"modality": {
-			"@id": "https://lodi.ilabt.imec.be/modi#modality",
+			"@id": "https://lodi.ilabt.imec.be/modi#RouteSegmentRequirement.modality",
 			"@type": "@id"
 		},
-		"JourneyRequirement": "https://lodi.ilabt.imec.be/modi#CriterionRequirementForMaaSSubsidy"
+		"JourneyRequirement": "https://lodi.ilabt.imec.be/modi#RouteSegmentRequirement",
+		"Payment": "Subsidiebedrag",
+		"offers", "biedtAan",
+		"amount": "bedrag",
+		"percentage": "https://lodi.ilabt.imec.be/modi#percentage",
+		"geometry": "http://www.w3.org/ns/locn#geometry",
+		"location": "https://lodi.ilabt.imec.be/modi#RouteSegmentRequirement.location",
+		"time": "https://schema.org/hoursAvailable",
+		"Place": "http://purl.org/dc/terms/Location",
+		"wkt": "http://www.opengis.net/ont/geosparql#asWKT"
 	}
 }
