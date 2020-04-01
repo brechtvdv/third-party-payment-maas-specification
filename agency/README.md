@@ -129,7 +129,7 @@ _This is still under construction_
 | `Sunday`      |  http://schema.org/Sunday
 
 
-### Entry form demonstrator
+## Entry form demonstrator
 _Under construction_
 
 See [Codepen](https://codepen.io/brechtvdv/pen/WNvQMdL)
