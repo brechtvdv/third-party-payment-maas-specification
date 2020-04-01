@@ -18,33 +18,19 @@ For example:
 	"@type": "SubsidyMeasurement",
 	"name": "...",
 	"hasCriterion": {
-	...
-	}
-```
-
-| Field        | Type | Description       | Example                                 |
-| ------------ | ---- | ----------------- | ------------------------------------------- |
-| `name` | String  | Description of the subsidy measurement   | 1 euro discount for users that used a shared bike |
-| `hasCriterion` | [Criterion](#criterion)   | Criterion that must be validated against   |  |
-
-
-## Criterion
-```
 		"@type": "Criterion",
-		"name": "",
 		"isFulfilledBy": {
 			"@type": "RequirementGroup",
-			"description": "",
+			"description": "...",
 			"hasCriterionRequirement": [ ... ]
 		}
 	}
-}
 ```
 
 | Field        | Type | Description       | Example                                 |
 | ------------ | ---- | ----------------- | ------------------------------------------- |
-| `name` | String  | Description of the criterion   | Criteria that the journey of a traveller must comply in order to gain a discount. |
-| `description` | String   | Array of requirements | Users that used a shared bike |
+| `name` | String  | Description of the subsidy measurement   | 1 euro discount for shared bikes |
+| `description` | String   | Description of the criteria must be met by the users' journey. | The user must use a shared bike between 4pm and 5pm in the centre. |
 | `hasCriterionRequirement` | [CriterionRequirement](#CriterionRequirement)   | Array of requirements |  |
 
 ## Criterium requirement
@@ -58,7 +44,7 @@ For example:
 ```
 | Field        | Type | Description       | Example                                 |
 | ------------ | ---- | ----------------- | ------------------------------------------- |
-| `description` | String  | Description of a journey requirement   | The traveller must have rented a shared bike." |
+| `description` | String  | Description of a journey requirement   | A shared bike must have been used." |
 | `modality` | Enum   | [Modality Type](#Modality Type) | shared bike |
 
 ### Enum definitions
