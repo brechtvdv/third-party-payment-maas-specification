@@ -4,7 +4,7 @@ This specification describes how an agency that regulates Mobility as a Service 
 
 ## Subsidy measurement for mobility journeys
 
-We describe how a subsidy measure can be described for giving discounts to certain mobility journeys of a user. When the criteria of the subsidy measure is met, then the user retrieves a discount on the cost of the journey with a fixed amount (e.g. 2 euro) or procentual discount (e.g. 10%). This is demonstrated with a Proof of Concept (see below) that a local government can use to generate rules with an entry form.
+We describe how a subsidy measure can be described for giving discounts to certain mobility journeys of a user. When the criteria of the subsidy measure is met, then the user retrieves a discount on the cost of the journey with a fixed amount (e.g. 2 euro) or procentual discount (e.g. 10%). This is demonstrated with an entry form as Proof of Concept (see [below](#Entry-form-demonstrator)) that a local government can use to generate the rules with.
 The datamodel extends the Flemish Application Profile [Besluit - subsidies](https://data.vlaanderen.be/doc/applicatieprofiel/besluit-subsidie/) of the Linked Decisions as Linked Open Data (LBLOD) project.
 
 _This is still under construction_
@@ -57,15 +57,50 @@ _This is still under construction_
 
 ```
 {
-	"@type": "JourneyRequirement",
+	"@type": "RouteSegmentRequirement",
 	"description": "...",
-	"modality": "..."
+	"modality": "...",
+	"location": { ... },
+	"time": [ ... ]
 }
 ```
 | Field        | Type | Description       | Example                                 |
 | ------------ | ---- | ----------------- | ------------------------------------------- |
-| `description` | String  | Description of a journey requirement   | A shared bike must have been used." |
-| `modality` | Enum   | [Modality Type](#Modality-Type) | https://lodi.ilabt.imec.be/modi/thesauri/modality/3 |
+| `description` | String  | Description of a requirement that a route segment of the journey of a user must comply with.   | A shared bike must have been used in the centre of the city." |
+| `modality` | Enum   | [Modality Type](#Modality-Type): must-used modality of the route segment. | https://lodi.ilabt.imec.be/modi/thesauri/modality/3 |
+| `location` | [Location](#Location)  | Location that the route segment must be covered with.  | must be located in city centre." |
+| `time` |  [OpeningHoursSpecification](#OpeningHoursSpecification) | Description of the hours during which the route segment must have happened. | |
+
+## Location
+
+```
+{
+	"@type": "Place",
+	"geometry": {
+		"wkt": "..."
+	}
+}
+```
+| Field        | Type | Description       | Example                                 |
+| ------------ | ---- | ----------------- | ------------------------------------------- |
+| `wkt` | String  | Well Known Text (WKT) description of the area that the route segment must be covered with.  | POLYGON((4.676055908203124 50.88993205766312,4.723434448242187 50.89025691478409,4.72360610961914 50.86610302664647,4.675369262695312 50.86599468504889,4.676055908203124 50.88993205766312)) |
+
+## OpeningHoursSpecification
+
+```
+{
+	"@type": "OpeningHoursSpecification",
+	"dayOfWeek": "...",
+	"startTime": "..."
+      	"endTime": "..."
+}
+```
+| Field        | Type | Description       | Example                                 |
+| ------------ | ---- | ----------------- | ------------------------------------------- |
+| `dayOfWeek` | Enum  | [Day of week](#Day-of-week)   | http://schema.org/Monday |
+| `startTime` | Time  |    | 15:00:00 |
+| `endTime` | Time   |  | 18:00:00 |
+
 
 ### Enum definitions
 
@@ -80,6 +115,19 @@ _This is still under construction_
 | `electric bike`      |  https://lodi.ilabt.imec.be/modi/thesauri/modality/4
 | `electric scooter`      |  https://lodi.ilabt.imec.be/modi/thesauri/modality/5
 | `electric step`      |  https://lodi.ilabt.imec.be/modi/thesauri/modality/6
+
+#### Day of week
+
+| `type`      | `URI` | 
+| ----------------- | ------- |
+| `Monday`           | http://schema.org/Monday
+| `Tuesday` | http://schema.org/Tuesday
+| `Wednesday`        |  http://schema.org/Wednesday
+| `Thursday`      |  http://schema.org/Thursday
+| `Friday`      |  http://schema.org/Friday
+| `Saturday`      |  http://schema.org/Saturday
+| `Sunday`      |  http://schema.org/Sunday
+
 
 ### Entry form demonstrator
 _Under construction_
