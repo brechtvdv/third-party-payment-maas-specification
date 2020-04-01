@@ -11,27 +11,47 @@ _This is still under construction_
 
 ## Subsidy measurement
 
-For example:
 ```
 {
 	"@context": "https://brechtvdv.github.io/third-party-support-maas-specification/agency/subsidymeasurementformobility.jsonld",
 	"@type": "SubsidyMeasurement",
 	"name": "...",
-	"hasCriterion": {
+	"offers": {
+		...
+	},
+	"hasCriterion": [{
 		"@type": "Criterion",
-		"isFulfilledBy": {
+		"isFulfilledBy": [{
 			"@type": "RequirementGroup",
 			"description": "...",
 			"hasCriterionRequirement": [ ... ]
-		}
-	}
+		}]
+	}]
+}
 ```
 
 | Field        | Type | Description       | Example                                 |
 | ------------ | ---- | ----------------- | ------------------------------------------- |
 | `name` | String  | Description of the subsidy measurement   | 1 euro discount for shared bikes |
 | `description` | String   | Description of the criteria must be met by the users' journey. | The user must use a shared bike between 4pm and 5pm in the centre. |
+| `offers` | [Payment](#Payment)   | Third party payment that the user is entitled to when all criteria are met. |  |
 | `hasCriterionRequirement` | [CriterionRequirement](#CriterionRequirement)   | Array of requirements |  |
+
+## Payment
+
+```
+{
+	"@type": "Payment",
+	"name": "...",
+	"amount": "...",
+	"percentage": "..."
+}
+```
+| Field        | Type | Description       | Example                                 |
+| ------------ | ---- | ----------------- | ------------------------------------------- |
+| `name` | String  | Description of the third party payment  | 1 euro discount |
+| `amount` | Double   | Fixed number of Euro that will be compensated. | 1 |
+| `percentage` | Double   | Percentage of the total cost of the journey that will be compensated. | 10 |
 
 ## Criterium requirement
 
@@ -39,13 +59,13 @@ For example:
 {
 	"@type": "JourneyRequirement",
 	"description": "...",
-	"modality": "https://lodi.ilabt.imec.be/modi/thesauri/modality/1"
+	"modality": "..."
 }
 ```
 | Field        | Type | Description       | Example                                 |
 | ------------ | ---- | ----------------- | ------------------------------------------- |
 | `description` | String  | Description of a journey requirement   | A shared bike must have been used." |
-| `modality` | Enum   | [Modality Type](#Modality-Type) | shared bike |
+| `modality` | Enum   | [Modality Type](#Modality-Type) | https://lodi.ilabt.imec.be/modi/thesauri/modality/3 |
 
 ### Enum definitions
 
