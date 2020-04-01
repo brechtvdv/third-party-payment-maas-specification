@@ -358,6 +358,7 @@
 		"Payment": "Subsidiebedrag",
 		"offers", "biedtAan",
 		"amount": "bedrag",
+		"maximumAmount": "maximumbedrag",
 		"percentage": "https://lodi.ilabt.imec.be/modi#percentage",
 		"geometry": "http://www.w3.org/ns/locn#geometry",
 		"location": "https://lodi.ilabt.imec.be/modi#RouteSegmentRequirement.location",
