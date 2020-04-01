@@ -52,6 +52,7 @@ _This is still under construction_
 | `name` | String  | Description of the third party payment  | 1 euro discount |
 | `amount` | Double   | Fixed number of Euro that will be compensated. | 1 |
 | `percentage` | Double   | Percentage of the total cost of the journey that will be compensated. Note: do not use `amount` and `percentage` together | 7 |
+| `maximumAmount` | Double | Maximum number of Euro that will be compensated. Use this in combination with the `percentage` field. | 5 |
 
 ## Criterium requirement
 
@@ -100,6 +101,24 @@ _This is still under construction_
 | `dayOfWeek` | Enum  | [Day of week](#Day-of-week)   | http://schema.org/Monday |
 | `startTime` | Time  |    | 15:00:00 |
 | `endTime` | Time   |  | 18:00:00 |
+
+## Multi modal journeys
+
+A user is entitled for payment when all Criteria is met. For a multi modal journey, this means that there is one Criterion for every route segment, which represents one modality. Strict order of criteria is currently not supported. 
+```
+"hasCriterion": [{
+		"@type": "Criterion",
+		"isFulfilledBy": [{
+			...
+		},
+		"@type": "Criterion",
+		"isFulfilledBy": [{
+			...
+		}],
+		...
+		}
+	}]
+```
 
 
 ### Enum definitions
