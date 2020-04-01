@@ -337,6 +337,23 @@
 			"@id":"http://purl.org/dc/terms/spatial",
 			"@type":"http://purl.org/dc/terms/Location",
 			"@container":"@set"
-		}
+		},
+		"name": "naam",
+		"SubsidyMeasurement": "SubsidiemaatregelAanbod",
+		"hasResponsible": "heeftVerantwoordelijke",
+		"Organisation": "Organisatie",
+		"preferredName": "voorkeursnaam",
+		"hasCriterion": "heeftCriterium",
+		"Criterion": "Criterium",
+		"isFulfilledBy": "isVervuldDoor",
+		"RequirementGroup": "VereistenGroep",
+		"description": "beschrijving",
+		"hasCriterionRequirement": "heeftVereiste",
+		"CriterionRequirement": "Vereiste",
+		"modality": {
+			"@id": "https://lodi.ilabt.imec.be/modi#modality",
+			"@type": "@id"
+		},
+		"JourneyRequirement": "https://lodi.ilabt.imec.be/modi#CriterionRequirementForMaaSSubsidy"
 	}
 }
