@@ -35,7 +35,7 @@ Part of a Route taken without a Transfer using the same means of transport.
    "arrivalTime": "...",
    "telemetry": [ ... ]
    "price": { ... },
-   "modality": "..."
+   "meansOfTransport": "..."
 }
 ```
 
@@ -45,7 +45,7 @@ Part of a Route taken without a Transfer using the same means of transport.
 | `arrivalTime` | xsd:dateTime  | When the user arrived.  |  2018-01-01T03:10:00 |
 | `telemetry` | [Directed link](#DirectedLink) | Set of links that represent the GPS trajectory of the route segment. |  |
 | `price` | [Monetary amount](#Monetary-amount) | Monetary amount that the user has paid or must pay without discount. | |
-| `modality` | Enum  | [Modality Type](#Modality-Type): the used modality | http://www.wikidata.org/entity/Q11442 |
+| `meansOfTransport` | Enum  | [Means of transport Type](#Means-of-transport-Type): the used modality or more specifically | http://www.wikidata.org/entity/Q11442 |
 
 ## Directed link
 Link in either its positive or negative direction.
@@ -86,13 +86,13 @@ Link in either its positive or negative direction.
 
 ### Enum definitions
 
-#### Modality Type
+#### Means of transport Type
 
 | `type`      | `URI` | 
 | ----------------- | ------- |
-| `by foot`           | https://www.wikidata.org/entity/Q6537379
-| `train` | https://www.wikidata.org/entity/Q870
-| `cargobike`        |  https://www.wikidata.org/entity/Q573863
+| `by foot`           | http://www.wikidata.org/entity/Q6537379
+| `train` | http://www.wikidata.org/entity/Q870
+| `cargobike`        |  http://www.wikidata.org/entity/Q573863
 | `bike`      |  http://www.wikidata.org/entity/Q11442
 | `electric bike`      |  http://www.wikidata.org/entity/Q924724
 | `scooter`      |  http://www.wikidata.org/entity/Q193234
