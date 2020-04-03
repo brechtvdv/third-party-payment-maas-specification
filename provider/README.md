@@ -1,6 +1,6 @@
 ## Third party support for MaaS Specification: provider
 
-In this section, we describe how a MaaS or mobility provider can describe a trip of a user following the OSLO mobility standard [trips and offerings](https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112). This mapping can be used as input for the [validating](#validator) to see whether this trip complies to a [subsidy measurement](https://github.com/brechtvdv/third-party-support-maas-specification/tree/master/agency#subsidy-measurement-for-mobility-trips) and how much can be compensated.
+In this section, we describe how a MaaS or mobility provider can describe a trip of a user following the OSLO mobility standard [trips and offerings](https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112). This mapping can be used as input for the [validator](#validator) to verify whether this trip complies to a [subsidy measurement](https://github.com/brechtvdv/third-party-support-maas-specification/tree/master/agency#subsidy-measurement-for-mobility-trips) and how much can be compensated.
 
 ## Mapping to OSLO mobility trips and offering
 
