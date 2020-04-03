@@ -4,11 +4,9 @@ In this section, we describe how a MaaS or mobility provider can describe a trip
 
 ## Mapping to OSLO mobility trips and offering
 
-This OSLO standard is an Application Profile (AP) and describes with a UML diagram which entities, relationships and attributes can or should be exchanged. The most important thing is that behind the scenes global identifiers (URIs) are used to describe these matters. Using HTTP URIs, which is one of the building blocks of Linked Data, ensures that everyone refers to something in the same way. An advantage from HTTP is that you can look up the term (e.g. https://schema.org/Trip to indicate that something is a Journey) to make sure the same thing is meant and this is not sensitive to any particular writing style. Thanks to this AP standard, developers can look up what the agreement is, namely which URIs (from OSLO vocabularies or other international standards) should be used. Different formats (JSON-LD, Turtle...) are possible to describe Linked Data, but the focus here is on the use of JSON-LD. See also the JSON-LD spec: https://www.w3.org/TR/json-ld11/#basic-concepts. 
-
-For the use case of describing a trip, we will only implement Trip (Reis), the executed Route (uitgevoerdeRoute) and associated route segments.
-
 ## Trip
+A trip or journey. An itinerary of visits to one or more places.
+
 ```
 {
  "@context": [
@@ -28,89 +26,76 @@ For the use case of describing a trip, we will only implement Trip (Reis), the e
 | `usedRouteSegments` | [Route segment](#Route-segment)  | Route segments that has been undertaken by the user.   |  |
 
 ## Route segment
+Part of a Route taken without a Transfer using the same means of transport.
+
 ```
 {
    "@type": "RouteSegment",
    "departureTime": "...",
    "arrivalTime": "...",
-   "departurePoint": { 
-      "@type": "Point",
-      "wkt": "POINT(3.7099885940551762 51.03561909085579)"
-   },
-   "arrivalPoint": { 
-      "@type": "Point",
-      "wkt": "POINT(4.357527494430542 50.84662457938373)"
-   },
-   "price": {
-     "@type": "MonetaryAmount",
-     "value": "8,2",
-     "currency": "EUR"
-   },
-   "modality": "https://lodi.ilabt.imec.be/modi/thesauri/modality/1"
+   "telemetry": [ ... ]
+   "price": { ... },
+   "modality": "..."
 }
 ```
 
 | Field        | Type | Description       | Example                                 |
 | ------------ | ---- | ----------------- | ------------------------------------------- |
-| `departureTime` | xsd:dateTime  | Date time that the user left the departure point with a certain modality.  |  2018-01-01T01:01:00 |
+| `departureTime` | xsd:dateTime  | When the user departed.  |  2018-01-01T01:01:00 |
+| `arrivalTime` | xsd:dateTime  | When the user arrived.  |  2018-01-01T03:10:00 |
+| `telemetry` | [Directed link](#DirectedLink) | Set of links that represent the GPS trajectory of the route segment. |  |
+| `price` | [Monetary amount](#Monetary-amount) | Monetary amount that the user has paid or must pay without discount. | |
+| `modality` | Enum  | [Modality Type](#Modality-Type): the used modality | http://www.wikidata.org/entity/Q11442 |
 
-
-
-
-<a href="https://github.com/brechtvdv/third_party_payment_maas/blob/master/provider/oslo-reis.PNG"><img src="https://github.com/brechtvdv/third_party_payment_maas/blob/master/provider/oslo-reis.PNG" align="left" height="500" width="auto" ></a>
-
-As example, we describe the minimal information that must be provided of a journey. Here we say that a traveller (Reiziger) undertakes a journey (Reis). The route that is performed (uitgevoerdeRoute) consists of (bestaatUit) route segments. A route segment describes a part of the journey that has been done with the same transportation modality (vervoermiddel). It contains its time of departure (vertrektijdstip) and arrival (aankomsttijdstip) and from point A (vertrekpunt) to point B (aankomstpunt) it is located. 
-For the modality types, the URIs will be maintained here: https://github.com/brechtvdv/criterionrequirement_for_mobility/blob/master/skos-modality.ttl 
+## Directed link
+Link in either its positive or negative direction.
 
 ```
-let journey = 
-{ "@context": [ "https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112/context/mobiliteit-trips-en-aanbod-ap.jsonld",
-"https://schema.org"
-]
- "@type": "Reiziger",
- "Onderneemt": {
-   "@type": "Reis",
-   "uitgevoerdeRoute": {
-     "@type": "Route",
-     "BestaatUit": [
-       {
-         "@type": "Routesegment",
-         "vertrektijdstip": "2018-01-01T01:01:00",
-         "aankomsttijdstip": "2018-01-01T01:31:00",
-         "vertrekpunt": { 
-            "@type": "Punt",
-            "wkt": "POINT(3.7099885940551762 51.03561909085579)"
-         },
-         "aankomstpunt": { 
-            "@type": "Punt",
-            "wkt": "POINT(4.357527494430542 50.84662457938373)"
-         },
-         "kostprijs": {
-           "@type": "Geldbedrag",
-           "value": "8,2",
-           "currency": "EUR"
-         },
-         "Routesegment.vervoermiddel": "https://lodi.ilabt.imec.be/modi/thesauri/modality/1"
-       },
-       {
-         "@type": "Routesegment",
-         "vertrektijdstip": "2018-01-01T01:31:00",
-         "aankomsttijdstip": "2018-01-01T01:40:00",
-         "vertrekpunt": { 
-            "@type": "Punt",
-            "wkt": "POINT(4.357527494430542 50.84662457938373)"
-         },
-         "aankomstpunt": { 
-            "@type": "Punt",
-            "wkt": "POINT(4.365552663803101 50.84217373687747)"
-         },
-         "Routesegment.vervoermiddel": "https://lodi.ilabt.imec.be/modi/thesauri/modality/2"
-       }
-     ]
-   }
- }
+{
+  "@type": "DirectedLink",
+  "link": {
+      "@type": "Link",
+      "geometryCenterline": {
+         "@type": "LineString",
+         "wkt": "..."
+      }
+  },
+  "direction": "..."
 }
 ```
+
+| Field        | Type | Description       | Example                                 |
+| ------------ | ---- | ----------------- | ------------------------------------------- |
+| `geometryCenterline:wkt` | WKT literal  |  Line string of the center line of the link. | LINESTRING(3.7099885940551762 51.03561909085579,4.692535400390624 50.88419254160871,4.357527494430542 50.84662457938373) |
+| `direction` | Boolean  |  Indicates if the directed link agrees (True) or disagrees (False) with the positive direction (geometry of the center line from left to right) of the link | True |
+
+## Monetary amount
+
+```
+{
+   "@type": "MonetaryAmount",
+   "value": "8.2",
+   "currency": "EUR"
+}
+```
+
+| Field        | Type | Description       | Example                                 |
+| ------------ | ---- | ----------------- | ------------------------------------------- |
+| `value` | Double  | The value of the quantitative value or property value node.  |  8.2 |
+| `currency` | String | The currency in which the monetary amount is expressed. |  EUR |
+
+### Enum definitions
+
+#### Modality Type
+
+| `type`      | `URI` | 
+| ----------------- | ------- |
+| `by foot`           | https://www.wikidata.org/wiki/Q6537379
+| `train` | https://www.wikidata.org/wiki/Q870
+| `cargobike`        |  https://www.wikidata.org/wiki/Q573863
+| `bike`      |  http://www.wikidata.org/entity/Q11442
+| `electric bike`      |  http://www.wikidata.org/entity/Q924724
+| `scooter`      |  http://www.wikidata.org/entity/Q193234
 
 ### Validate journey with rule engine
 
