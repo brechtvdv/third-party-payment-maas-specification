@@ -23,7 +23,7 @@ A trip or journey. An itinerary of visits to one or more places.
 
 | Field        | Type | Description       | Example                                 |
 | ------------ | ---- | ----------------- | ------------------------------------------- |
-| `usedRouteSegments` | [Route segment](#Route-segment)  | Route segments that has been undertaken by the user.   |  |
+| `usedRouteSegments` | [Route segment](#Route-segment)  | Route segments that have been undertaken by the user.   |  |
 
 ## Route segment
 Part of a Route taken without a Transfer using the same means of transport.
