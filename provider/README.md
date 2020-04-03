@@ -1,6 +1,6 @@
 ## Third party support for MaaS Specification: provider
 
-In this section, we describe how a MaaS or mobility provider can describe a trip of a user following the OSLO mobility standard [trips and offerings](https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112). This mapping can be used as input for the [validating](#validator) to see whether this trip complies to a [subsidy measurement](#https://github.com/brechtvdv/third-party-support-maas-specification/tree/master/agency#subsidy-measurement-for-mobility-trips) and how much can be compensated.
+In this section, we describe how a MaaS or mobility provider can describe a trip of a user following the OSLO mobility standard [trips and offerings](https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112). This mapping can be used as input for the [validating](#validator) to see whether this trip complies to a [subsidy measurement](https://github.com/brechtvdv/third-party-support-maas-specification/tree/master/agency#subsidy-measurement-for-mobility-trips) and how much can be compensated.
 
 ## Mapping to OSLO mobility trips and offering
 
@@ -97,16 +97,46 @@ Link in either its positive or negative direction.
 | `electric bike`      |  http://www.wikidata.org/entity/Q924724
 | `scooter`      |  http://www.wikidata.org/entity/Q193234
 
-### Validate journey with rule engine
+## Validating a trip with subsidy measurement
 
-The user has finished his journey and the MaaS app can now describe its journey with the above OSLO standard.
-To validate whether the journey is compliant with the criteria of the subsidy measure that is coupled with the voucher code,
-the MaaS back-end can run a small software component (rule engine) that takes two files as input:
-* a JSON-LD description of the criteria that is coupled with the subsidy measure: these criteria should be created by the local government and published with an Web API (like their website). For this Proof of Concept, the MaaS party will have a local copy of the description. We will create a simple GUI that can be used to create some example subsidy measures.
-* a JSON-LD description of the user journey (see above)
+A MaaS or mobility provider need to install and deploy the [validator](https://github.com/brechtvdv/third-party-support-maas-specification/tree/master/provider/validator) to validate the trip (mapped to the above OSLO standard) of a user with a subsidy measurement.
+
+## Validate with CLI
+
+The validator CLI takes two files as input:
+* a JSON-LD description of the [subsidy measurement](https://github.com/brechtvdv/third-party-support-maas-specification/tree/master/agency#subsidy-measurement-for-mobility-trips)
+* a JSON-LD description of the users' [trip](#Trip)
 
 The rule engine program can be run on Windows, Linux or MacOS and and looks like this on the command line:
 ```
 ./rule-engine -s exampleSubsidymeasure.jsonld -j exampleJourney.jsonld
 ```
-This will return OK or NOK, which means that the voucher may be given or not respectively.
+
+## Validate with API
+
+The `/validate` endpoint is used to validate a trip with a subsidy measurement
+
+Endpoint: `/validate`
+Method: `GET`
+
+Query Params:
+
+| Field        | Type    |  Field Description                                                    |
+| ------------ | ------- |  -------------------------------------------------------------------- |
+| `trip`  | [Trip](#Trip)     | Provided by Operator that describes the trip of a user                 |
+| `subsidymeasurement` | [Subsidy measurement](https://github.com/brechtvdv/third-party-support-maas-specification/tree/master/agency#subsidy-measurement-for-mobility-trips)  | Provided by Agent that describes a subsidy measurement       |
+
+201 Success Response:
+
+```
+{
+	"todo"
+}
+```
+
+404 Failure Response:
+
+_No content returned on vehicle not found._
+
+
+
