@@ -68,7 +68,7 @@ _This is still under construction_
 | Field        | Type | Description       | Example                                 |
 | ------------ | ---- | ----------------- | ------------------------------------------- |
 | `description` | String  | Description of a requirement that a route segment of the trip of a user must comply with.   | Only shared bikes, on monday between 4pm and 6pm and used in the centre of the city." |
-| `modality` | Enum   | [Modality Type](#Modality-Type): must-used modality of the route segment. | https://lodi.ilabt.imec.be/modi/thesauri/modality/3 |
+| `modality` | Enum   | [Modality Type](#Modality-Type): modality that user must use for the route segment. | http://www.wikidata.org/entity/Q11442 |
 | `location` | [Location](#Location)  | Location that the route segment must be covered with.  |  |
 | `time` |  [OpeningHoursSpecification](#OpeningHoursSpecification) | Description of the hours during which the route segment must have happened. | |
 
@@ -84,7 +84,7 @@ _This is still under construction_
 ```
 | Field        | Type | Description       | Example                                 |
 | ------------ | ---- | ----------------- | ------------------------------------------- |
-| `wkt` | String  | Well Known Text (WKT) description of the area that the route segment must be covered with.  | POLYGON((4.676055908203124 50.88993205766312,4.723434448242187 50.89025691478409,4.72360610961914 50.86610302664647,4.675369262695312 50.86599468504889,4.676055908203124 50.88993205766312)) |
+| `wkt` | WKT Literal  | Well Known Text (WKT) description of the area that the route segment must be covered with.  | POLYGON((4.676055908203124 50.88993205766312,4.723434448242187 50.89025691478409,4.72360610961914 50.86610302664647,4.675369262695312 50.86599468504889,4.676055908203124 50.88993205766312)) |
 
 ## OpeningHoursSpecification
 
@@ -127,13 +127,12 @@ A user is entitled for payment when all Criteria is met. For a multi modal trip,
 
 | `type`      | `URI` | 
 | ----------------- | ------- |
-| `by foot`           | https://lodi.ilabt.imec.be/modi/thesauri/modality/0
-| `train` | https://lodi.ilabt.imec.be/modi/thesauri/modality/1
-| `cargobike`        |  https://lodi.ilabt.imec.be/modi/thesauri/modality/2  
-| `bike`      |  https://lodi.ilabt.imec.be/modi/thesauri/modality/3
-| `electric bike`      |  https://lodi.ilabt.imec.be/modi/thesauri/modality/4
-| `electric scooter`      |  https://lodi.ilabt.imec.be/modi/thesauri/modality/5
-| `electric step`      |  https://lodi.ilabt.imec.be/modi/thesauri/modality/6
+| `by foot`           | https://www.wikidata.org/wiki/Q6537379
+| `train` | https://www.wikidata.org/wiki/Q870
+| `cargobike`        |  https://www.wikidata.org/wiki/Q573863
+| `bike`      |  http://www.wikidata.org/entity/Q11442
+| `electric bike`      |  http://www.wikidata.org/entity/Q924724
+| `scooter`      |  http://www.wikidata.org/entity/Q193234
 
 #### Day of week
 
