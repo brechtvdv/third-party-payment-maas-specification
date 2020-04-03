@@ -8,12 +8,19 @@
     "RouteSegment": "Routesegment",
     "departureTime": "vertrektijdstip",
     "arrivalTime": "aankomsttijdstip",
-    "departurePoint": "vertrekpunt",
-    "arrivalPoint": "aankomstpunt",
+    "departureNode": "vertrekknoop",
+    "arrivalNode": "aankomstknoop",
     "price": "kostprijs",
     "modality": "Routesegment.vervoermiddel",
     "Point": "Punt",
-    "MonetaryAmount": "Geldbedrag"
+    "MonetaryAmount": "Geldbedrag",
+    "telemetry": "Routesegment.link",
+    "DirectedLink": "GerichteLink",
+    "link": "GerichteLink.link",
+    "direction": "richting",
+    "Node": "Routeknoop",
+    "geometryCenterline": "geometriemiddellijn",
+    "LineString": "Lijnstring"
   }
   ]
   
