@@ -60,7 +60,7 @@ _This is still under construction_
 {
 	"@type": "RouteSegmentRequirement",
 	"description": "...",
-	"modality": "...",
+	"meansOfTransport": "...",
 	"location": { ... },
 	"time": [ ... ]
 }
@@ -68,7 +68,7 @@ _This is still under construction_
 | Field        | Type | Description       | Example                                 |
 | ------------ | ---- | ----------------- | ------------------------------------------- |
 | `description` | String  | Description of a requirement that a route segment of the trip of a user must comply with.   | Only shared bikes, on monday between 4pm and 6pm and used in the centre of the city." |
-| `modality` | Enum   | [Modality Type](#Modality-Type): modality that user must use for the route segment. | http://www.wikidata.org/entity/Q11442 |
+| `meansOfTransport` | Enum   | [Means of transport Type](#Means-of-transport-Type): which mode of transport or more specific (e.g. electric bike) the user must use for the route segment. | http://www.wikidata.org/entity/Q11442 |
 | `location` | [Location](#Location)  | Location that the route segment must be covered with.  |  |
 | `time` |  [OpeningHoursSpecification](#OpeningHoursSpecification) | Description of the hours during which the route segment must have happened. | |
 
@@ -104,7 +104,7 @@ _This is still under construction_
 
 ## Multi modal trips
 
-A user is entitled for payment when all Criteria is met. For a multi modal trip, this means that there is one Criterion for every route segment, which represents one modality. Strict order of criteria is currently not supported. 
+A user is entitled for payment when all Criteria is met. For a multi modal trip, this means that there is one Criterion for every route segment, which uses the same transport resource. Strict order of criteria is currently not supported. 
 ```
 "hasCriterion": [{
 		"@type": "Criterion",
@@ -123,7 +123,7 @@ A user is entitled for payment when all Criteria is met. For a multi modal trip,
 
 ### Enum definitions
 
-#### Modality Type
+#### Means of transport Type
 
 | `type`      | `URI` | 
 | ----------------- | ------- |
