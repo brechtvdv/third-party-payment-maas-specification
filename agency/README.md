@@ -127,9 +127,9 @@ A user is entitled for payment when all Criteria is met. For a multi modal trip,
 
 | `type`      | `URI` | 
 | ----------------- | ------- |
-| `by foot`           | https://www.wikidata.org/entity/Q6537379
-| `train` | https://www.wikidata.org/entity/Q870
-| `cargobike`        |  https://www.wikidata.org/entity/Q573863
+| `by foot`           | http://www.wikidata.org/entity/Q6537379
+| `train` | http://www.wikidata.org/entity/Q870
+| `cargobike`        |  http://www.wikidata.org/entity/Q573863
 | `bike`      |  http://www.wikidata.org/entity/Q11442
 | `electric bike`      |  http://www.wikidata.org/entity/Q924724
 | `scooter`      |  http://www.wikidata.org/entity/Q193234
