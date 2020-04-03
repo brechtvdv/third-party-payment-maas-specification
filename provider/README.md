@@ -1,14 +1,61 @@
-## Validation of user journey
+## Third party support for MaaS Specification: provider
 
-### describe a journey with the OSLO mobility standard
+In this section, we describe how a MaaS or mobility provider can describe a trip of a user following the OSLO mobility standard [trips and offerings](https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112). This mapping can used as input for the [validating](#validator) to see whether this trip complies to a [subsidy measurement](#https://github.com/brechtvdv/third-party-support-maas-specification/tree/master/agency#subsidy-measurement-for-mobility-trips) and how much can be compensated.
 
-In this section we describe how a trip can be described using the OSLO mobility standard for "trips and offerings". It is crucial that all MaaS apps use the same semantics for a user journey, so the rule engine can be generic.
+## Mapping to OSLO mobility trips and offering
 
 This OSLO standard is an Application Profile (AP) and describes with a UML diagram which entities, relationships and attributes can or should be exchanged. The most important thing is that behind the scenes global identifiers (URIs) are used to describe these matters. Using HTTP URIs, which is one of the building blocks of Linked Data, ensures that everyone refers to something in the same way. An advantage from HTTP is that you can look up the term (e.g. https://schema.org/Trip to indicate that something is a Journey) to make sure the same thing is meant and this is not sensitive to any particular writing style. Thanks to this AP standard, developers can look up what the agreement is, namely which URIs (from OSLO vocabularies or other international standards) should be used. Different formats (JSON-LD, Turtle...) are possible to describe Linked Data, but the focus here is on the use of JSON-LD. See also the JSON-LD spec: https://www.w3.org/TR/json-ld11/#basic-concepts. 
 
-The AP is published here: https://otl-test.data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-trips-en-aanbod/kandidaatstandaard/20200112
-For this use case, only the passenger part of the AP needs to be implemented. This can be seen below:
-We will only implement Trip (Reis), the executed Route (uitgevoerdeRoute) and associated route segments.
+For the use case of describing a trip, we will only implement Trip (Reis), the executed Route (uitgevoerdeRoute) and associated route segments.
+
+## Trip
+```
+{
+ "@context": [
+  "https://brechtvdv.github.io/third-party-support-maas-specification/provider/oslomobilitytripsandoffer.jsonld",
+  "https://schema.org"
+ ],
+   "@type": "Trip",
+   "executedRoute": {
+       "@type": "Route",
+       "usedRouteSegments": [ ... ]
+    }
+}
+```
+
+| Field        | Type | Description       | Example                                 |
+| ------------ | ---- | ----------------- | ------------------------------------------- |
+| `usedRouteSegments` | [Route segment](#Route-segment)  | Route segments that has been undertaken by the user.   |  |
+
+## Route segment
+```
+{
+   "@type": "RouteSegment",
+   "departureTime": "...",
+   "arrivalTime": "...",
+   "departurePoint": { 
+      "@type": "Point",
+      "wkt": "POINT(3.7099885940551762 51.03561909085579)"
+   },
+   "arrivalPoint": { 
+      "@type": "Point",
+      "wkt": "POINT(4.357527494430542 50.84662457938373)"
+   },
+   "price": {
+     "@type": "MonetaryAmount",
+     "value": "8,2",
+     "currency": "EUR"
+   },
+   "modality": "https://lodi.ilabt.imec.be/modi/thesauri/modality/1"
+}
+```
+
+| Field        | Type | Description       | Example                                 |
+| ------------ | ---- | ----------------- | ------------------------------------------- |
+| `departureTime` | xsd:dateTime  | Date time that the user left the departure point with a certain modality.  |  2018-01-01T01:01:00 |
+
+
+
 
 <a href="https://github.com/brechtvdv/third_party_payment_maas/blob/master/provider/oslo-reis.PNG"><img src="https://github.com/brechtvdv/third_party_payment_maas/blob/master/provider/oslo-reis.PNG" align="left" height="500" width="auto" ></a>
 
