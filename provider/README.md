@@ -33,7 +33,7 @@ Part of a Route taken without a Transfer using the same means of transport.
    "@type": "RouteSegment",
    "departureTime": "...",
    "arrivalTime": "...",
-   "telemetry": [ ... ]
+   "telemetry": [ ... ],
    "price": { ... },
    "meansOfTransport": "..."
 }
@@ -74,7 +74,7 @@ Link in either its positive or negative direction.
 ```
 {
    "@type": "MonetaryAmount",
-   "value": "8.2",
+   "value": "...",
    "currency": "EUR"
 }
 ```
