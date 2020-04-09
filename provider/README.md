@@ -67,7 +67,7 @@ Link in either its positive or negative direction.
 | Field        | Type | Description       | Example                                 |
 | ------------ | ---- | ----------------- | ------------------------------------------- |
 | `wkt` | WKT literal  |  Line string of the center line of the link. | LINESTRING(3.7099885940551762 51.03561909085579,4.692535400390624 50.88419254160871,4.357527494430542 50.84662457938373) |
-| `direction` | Boolean  |  Indicates if the directed link agrees (True) or disagrees (False) with the positive direction (geometry of the center line from left to right) of the link | True |
+| `direction` | Boolean  |  Indicates if the directed link agrees (true) or disagrees (false) with the positive direction (geometry of the center line from left to right) of the link | true |
 
 ## Monetary amount
 
