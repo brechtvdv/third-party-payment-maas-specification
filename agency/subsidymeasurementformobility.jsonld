@@ -356,7 +356,7 @@
 		},
 		"JourneyRequirement": "https://lodi.ilabt.imec.be/modi#RouteSegmentRequirement",
 		"Payment": "Subsidiebedrag",
-		"offers", "biedtAan",
+		"offers": "biedtAan",
 		"amount": "bedrag",
 		"maximumAmount": "maximumbedrag",
 		"percentage": "https://lodi.ilabt.imec.be/modi#percentage",
