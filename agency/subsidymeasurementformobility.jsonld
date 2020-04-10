@@ -350,8 +350,8 @@
 		"description": "beschrijving",
 		"hasCriterionRequirement": "heeftVereiste",
 		"CriterionRequirement": "Vereiste",
-		"modality": {
-			"@id": "https://lodi.ilabt.imec.be/modi#RouteSegmentRequirement.modality",
+		"meansOfTransport": {
+			"@id": "https://lodi.ilabt.imec.be/modi#RouteSegmentRequirement.meansOfTransport",
 			"@type": "@id"
 		},
 		"JourneyRequirement": "https://lodi.ilabt.imec.be/modi#RouteSegmentRequirement",
