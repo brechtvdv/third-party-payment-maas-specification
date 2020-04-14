@@ -44,7 +44,8 @@ _This is still under construction_
 	"@type": "Payment",
 	"name": "...",
 	"amount": "...",
-	"percentage": "..."
+	"percentage": "...",
+	"maximumAmount": "..."
 }
 ```
 | Field        | Type | Description       | Example                                 |
