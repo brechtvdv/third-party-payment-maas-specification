@@ -11,7 +11,7 @@
     "departureNode": "vertrekknoop",
     "arrivalNode": "aankomstknoop",
     "price": "kostprijs",
-    "modality": "Routesegment.vervoermiddel",
+    "meansOfTransport": "Routesegment.vervoermiddel",
     "Point": "Punt",
     "MonetaryAmount": "Geldbedrag",
     "telemetry": "Routesegment.link",
