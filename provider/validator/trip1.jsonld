@@ -1,0 +1,37 @@
+{
+ "@context": [
+  "https://brechtvdv.github.io/third-party-support-maas-specification/provider/oslomobilitytripsandoffer.jsonld",
+  "https://schema.org"
+ ],
+   "@type": "Trip",
+   "executedRoute": {
+       "@type": "Route",
+       "usedRouteSegments": [
+        {
+           "@type": "RouteSegment",
+           "departureTime": "2018-01-01T01:01:00",
+           "arrivalTime": "2018-01-01T03:10:00",
+           "telemetry": [
+           {
+              "@type": "DirectedLink",
+              "link": {
+                  "@type": "Link",
+                  "geometryCenterline": {
+                     "@type": "LineString",
+                     "wkt": "LINESTRING(3.7099885940551762 51.03561909085579,4.692535400390624 50.88419254160871,4.357527494430542 50.84662457938373)"
+                  }
+              },
+              "direction": true
+            }
+           ],
+           "price": {
+             "@type": "MonetaryAmount",
+             "value": "8.2",
+             "currency": "EUR"
+           },
+           "meansOfTransport": "http://www.wikidata.org/entity/Q11442"
+        }
+       ]
+     
+ }
+}
