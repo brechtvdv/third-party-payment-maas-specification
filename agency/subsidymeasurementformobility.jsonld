@@ -362,7 +362,7 @@
 		"percentage": "https://lodi.ilabt.imec.be/modi#percentage",
 		"geometry": "http://www.w3.org/ns/locn#geometry",
 		"location": "https://lodi.ilabt.imec.be/modi#RouteSegmentRequirement.location",
-		"time": "https://schema.org/hoursAvailable",
+		"time": "http://schema.org/hoursAvailable",
 		"Place": "http://purl.org/dc/terms/Location",
 		"wkt": "http://www.opengis.net/ont/geosparql#asWKT"
 	}
