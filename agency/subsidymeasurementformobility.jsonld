@@ -342,7 +342,7 @@
 		"SubsidyMeasurement": "SubsidiemaatregelAanbod",
 		"hasResponsible": "heeftVerantwoordelijke",
 		"Organisation": "Organisatie",
-		"preferredName": "voorkeursnaam",
+		"preferredName": "voorkeursNaam",
 		"hasCriterion": "heeftCriterium",
 		"Criterion": "Criterium",
 		"isFulfilledBy": "isVervuldDoor",
