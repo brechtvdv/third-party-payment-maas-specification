@@ -109,11 +109,25 @@ The validator CLI takes two files as input:
 
 The rule engine program can be run on Windows, Linux or MacOS and and looks like this on the command line:
 ```
-./rule-engine -s exampleSubsidymeasure.jsonld -j exampleJourney.jsonld
+./rule-engine -s subsidymeasure1.jsonld -t trip1.jsonld
+```
+Following JSON-LD object will be returned:
+```
+{
+	"@context": "https://brechtvdv.github.io/third-party-support-maas-specification/agency/subsidymeasurementformobility.jsonld",
+	"@type": "Payment",
+	"amount": ...,
+	"tripIsConform": ...
+}
 ```
 
-## Validate with API
+| Field        | Type    |  Field Description                                                    | Example                   |
+| ------------ | ------- |  -------------------------------------------------------------------- |----------------------------|
+| `amount`  | Double     | The amount of Euro that the provided trip will be compensated with    | 1.5 |
+| `tripIsConform` | Boolean  | Whether the trip is conform (true) or not (false) with the criteria of the subsidy measurement | true |
 
+## Validate with API
+_under construction_
 The `/validate` endpoint is used to validate a trip with a subsidy measurement
 
 Endpoint: `/validate`
@@ -136,7 +150,7 @@ Query Params:
 
 404 Failure Response:
 
-_No content returned on vehicle not found._
+_No content returned when validation fails._
 
 
 
