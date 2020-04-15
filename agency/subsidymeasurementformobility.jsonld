@@ -354,7 +354,7 @@
 			"@id": "https://lodi.ilabt.imec.be/modi#RouteSegmentRequirement.meansOfTransport",
 			"@type": "@id"
 		},
-		"JourneyRequirement": "https://lodi.ilabt.imec.be/modi#RouteSegmentRequirement",
+		"RouteSegmentRequirement": "https://lodi.ilabt.imec.be/modi#RouteSegmentRequirement",
 		"Payment": "Subsidiebedrag",
 		"offers": "biedtAan",
 		"amount": "bedrag",
