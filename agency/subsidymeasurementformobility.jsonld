@@ -349,7 +349,7 @@
 		"RequirementGroup": "VereistenGroep",
 		"description": "beschrijving",
 		"hasCriterionRequirement": "heeftVereiste",
-		"CriterionRequirement": "Vereiste",
+		"CriterionRequirement": "CriteriumVereiste",
 		"meansOfTransport": {
 			"@id": "https://lodi.ilabt.imec.be/modi#RouteSegmentRequirement.meansOfTransport",
 			"@type": "@id"
