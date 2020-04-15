@@ -364,6 +364,7 @@
 		"location": "https://lodi.ilabt.imec.be/modi#RouteSegmentRequirement.location",
 		"time": "http://schema.org/hoursAvailable",
 		"Place": "http://purl.org/dc/terms/Location",
-		"wkt": "http://www.opengis.net/ont/geosparql#asWKT"
+		"wkt": "http://www.opengis.net/ont/geosparql#asWKT",
+		"tripIsConform": "https://lodi.ilabt.imec.be/modi#tripIsConform"
 	}
 }
