@@ -1,1 +1,3 @@
-To be announced end of April
+_Status: under juridical validation_
+
+_Will be announced soon_
