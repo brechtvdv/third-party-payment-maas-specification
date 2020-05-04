@@ -1,3 +1,3 @@
-_Status: under juridical validation_
+# Samenwerkingsovereenkost
 
-_Will be announced soon_
+Zie document voor [samenwerkingsovereenkomst](2104%20Uniform%20derdebetalersovereenkomst%20concept.pdf)
